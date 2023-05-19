@@ -1,0 +1,21 @@
+on:
+  push:
+    branches:
+      - main
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  apply:
+    name: terraform destroy
+    runs-on: ubuntu-latest
+    steps:
+      - name: config aws
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: "AKIAXHPQG33QBCJJLCNY"
+          aws-secret-access-key: "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"
+          aws-region: "us-east-1"
+
+      - run: aws ec2 modify-instance-attribute --instance-id i-03c676943e922edc6 --groups sg-083fb384f44f2c07e   
